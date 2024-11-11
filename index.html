@@ -92,8 +92,8 @@
         <!-- Formulário de conversão -->
         <input type="number" id="valor" placeholder="Digite o valor" required>
         <select id="tipoConversao">
-            <option value="dinheiroParaMilhas">Dinheiro para Milhas</option>
             <option value="milhasParaDinheiro">Milhas para Dinheiro</option>
+            <option value="dinheiroParaMilhas">Dinheiro para Milhas</option>
         </select>
         <button onclick="converter()">Converter</button>
 
@@ -116,13 +116,13 @@
             let resultado = 0;
 
             // Fórmulas de conversão
-            if (tipoConversao === "dinheiroParaMilhas") {
-                resultado = valor * 0.026; // 1 real = 0,026 milhas
-            } else if (tipoConversao === "milhasParaDinheiro") {
-                resultado = valor / 0.026; // 1 milha = 1/0,026 reais
+            if (tipoConversao === "milhasParaDinheiro") {
+                resultado = valor * 0.026; // 1 milha = 0,026 reais
+                document.getElementById("resultado").innerText = "R$ " + resultado.toFixed(2);
+            } else if (tipoConversao === "dinheiroParaMilhas") {
+                resultado = valor / 0.026; // 1 real = 1/0,026 milhas
+                document.getElementById("resultado").innerText = resultado.toFixed(2) + " milhas";
             }
-
-            document.getElementById("resultado").innerText = resultado.toFixed(2);
         }
     </script>
 
