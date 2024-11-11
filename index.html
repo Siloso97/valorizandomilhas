@@ -5,56 +5,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Valorizador de Milhas</title>
     <style>
-        /* Estilo básico */
         body {
             font-family: Arial, sans-serif;
-            background-color: #f0f4f8;
             display: flex;
             justify-content: center;
+            align-items: center;
             height: 100vh;
             margin: 0;
-            flex-direction: column;
+            background-color: #f0f4f8;
         }
 
         .container {
-            background: #ffffff;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             width: 80%;
-            margin-bottom: 20px;
-        }
-
-        /* Layout em duas partes */
-        .content {
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .left-side {
-            width: 48%;
-            text-align: left;
-        }
-
-        .right-side {
-            width: 48%;
-            text-align: left;
-        }
-
-        h1 {
-            color: #1a73e8;
-            margin-bottom: 20px;
-            font-size: 1.8em;
+            max-width: 800px;
+            text-align: center;
         }
 
         input, select, button {
+            padding: 10px;
             margin: 10px 0;
-            padding: 12px;
             width: 100%;
-            font-size: 1em;
-            border: 1px solid #ddd;
             border-radius: 5px;
-            box-sizing: border-box;
+            border: 1px solid #ccc;
         }
 
         button {
@@ -62,18 +38,21 @@
             color: white;
             font-weight: bold;
             cursor: pointer;
-            border: none;
-            transition: background-color 0.3s;
         }
 
         button:hover {
             background-color: #155bb5;
         }
 
-        #resultado {
-            font-weight: bold;
-            color: #333;
+        .result, .min-max {
             margin-top: 20px;
+        }
+
+        .min-max {
+            background-color: #f9f9f9;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 1.1em;
         }
 
         .footer {
@@ -83,30 +62,11 @@
         }
 
         .link-box {
-            display: inline-block;
             margin-top: 10px;
-            background-color: #f0f0f0;
-            padding: 10px;
-            border-radius: 5px;
-            font-size: 0.9em;
         }
 
         .link-box a {
             color: #1a73e8;
-            text-decoration: none;
-            font-weight: bold;
-        }
-
-        /* Estilo para valores mínimo e máximo */
-        .valor-box {
-            background-color: #f0f0f0;
-            padding: 15px;
-            margin-top: 20px;
-            border-radius: 5px;
-        }
-
-        .valor-box p {
-            font-size: 1.2em;
             font-weight: bold;
         }
     </style>
@@ -114,42 +74,35 @@
 <body>
 
     <div class="container">
-        <div class="content">
-            <!-- Lado esquerdo (calculadora) -->
-            <div class="left-side">
-                <h1>Valorizador de Milhas</h1>
+        <h1>Valorizador de Milhas</h1>
 
-                <!-- Formulário de conversão -->
-                <input type="number" id="valor" placeholder="Digite o valor" required>
-                <select id="tipoConversao">
-                    <option value="milhasParaDinheiro">Milhas para Dinheiro</option>
-                    <option value="dinheiroParaMilhas">Dinheiro para Milhas</option>
-                </select>
-                <button onclick="converter()">Converter</button>
+        <!-- Formulário de conversão -->
+        <input type="number" id="valor" placeholder="Digite o valor" required>
+        <select id="tipoConversao">
+            <option value="milhasParaDinheiro">Milhas para Dinheiro</option>
+            <option value="dinheiroParaMilhas">Dinheiro para Milhas</option>
+        </select>
+        <button onclick="converter()">Converter</button>
 
-                <h2>Resultado: <span id="resultado"></span></h2>
-            </div>
-
-            <!-- Lado direito (caixa de busca e valores mínimo/máximo) -->
-            <div class="right-side">
-                <div class="link-box">
-                    <a href="https://www.google.com/travel/flights?gl=BR&hl=pt-BR" target="_blank">
-                        Quer saber o valor do seu voo? Clique aqui
-                    </a>
-                </div>
-
-                <div class="valor-box">
-                    <p>Valores estimados para milhas em reais:</p>
-                    <p><strong>Menor valor (com 0,01 por milha):</strong> R$ <span id="valorMinimo"></span></p>
-                    <p><strong>Maior valor (com 0,07 por milha):</strong> R$ <span id="valorMaximo"></span></p>
-                    <p><small>Esses são os menores e maiores valores que podemos obter com as milhas para compra nas companhias aéreas brasileiras, mas isso pode sofrer alterações de acordo com as promoções e campanhas vigentes.</small></p>
-                </div>
-            </div>
+        <!-- Resultado da conversão -->
+        <div class="result">
+            <h2>Resultado: <span id="resultado"></span></h2>
         </div>
-    </div>
 
-    <div class="footer">
-        <p>A taxa de conversão entre milhas e reais pode variar entre diferentes empresas; este site fornece apenas uma estimativa aproximada. Nosso objetivo é promover o uso consciente e estratégico das milhas de viagem. Projeto idealizado pelo Grupo 3 do Itinerário de Educação Financeira.</p>
+        <!-- Valores mínimo e máximo -->
+        <div class="min-max">
+            <p><strong>Menor valor (0,01 por milha):</strong> R$ <span id="valorMinimo"></span></p>
+            <p><strong>Maior valor (0,07 por milha):</strong> R$ <span id="valorMaximo"></span></p>
+            <p><small>Esses são os menores e maiores valores que podemos obter com as milhas para compra nas companhias aéreas brasileiras, mas isso pode sofrer alterações de acordo com as promoções e campanhas vigentes.</small></p>
+        </div>
+
+        <div class="link-box">
+            <a href="https://www.google.com/travel/flights?gl=BR&hl=pt-BR" target="_blank">Quer saber o valor do seu voo? Clique aqui</a>
+        </div>
+
+        <div class="footer">
+            <p>A taxa de conversão entre milhas e reais pode variar entre diferentes empresas; este site fornece apenas uma estimativa aproximada. Nosso objetivo é promover o uso consciente e estratégico das milhas de viagem.</p>
+        </div>
     </div>
 
     <script>
