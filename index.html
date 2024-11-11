@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valorizador de Milhas</title>
+    <style>
+        /* Estilo básico */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f4f8;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+        }
+
+        h1 {
+            color: #1a73e8;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+
+        input, select, button {
+            margin: 10px 0;
+            padding: 12px;
+            width: 100%;
+            font-size: 1em;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #1a73e8;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            border: none;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #155bb5;
+        }
+
+        #resultado {
+            font-weight: bold;
+            color: #333;
+            margin-top: 20px;
+        }
+
+        .footer {
+            margin-top: 20px;
+            font-size: 0.9em;
+            color: #555;
+        }
+
+        .link-box {
+            display: inline-block;
+            margin-top: 10px;
+            background-color: #f0f0f0;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 0.9em;
+        }
+
+        .link-box a {
+            color: #1a73e8;
+            text-decoration: none;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Valorizador de Milhas</h1>
+
+        <!-- Formulário de conversão -->
+        <input type="number" id="valor" placeholder="Digite o valor" required>
+        <select id="tipoConversao">
+            <option value="dinheiroParaMilhas">Dinheiro para Milhas</option>
+            <option value="milhasParaDinheiro">Milhas para Dinheiro</option>
+        </select>
+        <button onclick="converter()">Converter</button>
+
+        <h2>Resultado: <span id="resultado"></span></h2>
+        
+        <div class="footer">
+            <p>A taxa de conversão entre milhas e reais pode variar entre diferentes empresas; este site fornece apenas uma estimativa aproximada. Nosso objetivo é promover o uso consciente e estratégico das milhas de viagem. Projeto idealizado pelo Grupo 3 do Itinerário de Educação Financeira.</p>
+            <div class="link-box">
+                <a href="https://www.google.com/travel/flights?gl=BR&hl=pt-BR" target="_blank">
+                    Quer saber o valor do seu voo? Clique aqui
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function converter() {
+            const valor = parseFloat(document.getElementById("valor").value);
+            const tipoConversao = document.getElementById("tipoConversao").value;
+            let resultado = 0;
+
+            // Fórmulas de conversão
+            if (tipoConversao === "dinheiroParaMilhas") {
+                resultado = valor * 0.026; // 1 real = 0,026 milhas
+            } else if (tipoConversao === "milhasParaDinheiro") {
+                resultado = valor / 0.026; // 1 milha = 1/0,026 reais
+            }
+
+            document.getElementById("resultado").innerText = resultado.toFixed(2);
+        }
+    </script>
+
+</body>
+</html>
